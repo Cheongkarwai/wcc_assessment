@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX postcodelatlng_index ON postcodelatlng(postcode);
