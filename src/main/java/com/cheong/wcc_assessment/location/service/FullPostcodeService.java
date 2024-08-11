@@ -5,12 +5,14 @@ import com.cheong.wcc_assessment.location.dto.OutcodeDTO;
 import com.cheong.wcc_assessment.location.repository.FullPostcodeRepository;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class FullPostcodeService {
 
     private final FullPostcodeRepository fullPostcodeRepository;
