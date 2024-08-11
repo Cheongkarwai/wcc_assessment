@@ -3,7 +3,9 @@ package com.cheong.wcc_assessment.location.api;
 import com.cheong.wcc_assessment.location.dto.DistanceDTO;
 import com.cheong.wcc_assessment.location.dto.FullPostcodeDTO;
 import com.cheong.wcc_assessment.location.dto.OutcodeDTO;
+import com.cheong.wcc_assessment.location.service.FullPostcodeService;
 import com.cheong.wcc_assessment.location.service.LocationService;
+import com.cheong.wcc_assessment.location.service.OutcodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -21,8 +23,16 @@ public class LocationApi {
 
     private final LocationService locationService;
 
-    public LocationApi(LocationService locationService){
+    private final FullPostcodeService fullPostcodeService;
+
+    private final OutcodeService outcodeService;
+
+    public LocationApi(LocationService locationService,
+                       FullPostcodeService fullPostcodeService,
+                       OutcodeService outcodeService){
         this.locationService = locationService;
+        this.fullPostcodeService = fullPostcodeService;
+        this.outcodeService = outcodeService;
     }
 
 
@@ -41,7 +51,7 @@ public class LocationApi {
 
         log.info("Request Body OutcodeDTO : {}", outcodeDTO.toString());
 
-        OutcodeDTO savedOutcode = locationService.saveOutcode(outcodeDTO);
+        OutcodeDTO savedOutcode = outcodeService.save(outcodeDTO);
         URI uri = UriComponentsBuilder.newInstance()
                 .path("/api/locations/outcodes")
                 .pathSegment("{code}")
@@ -54,7 +64,7 @@ public class LocationApi {
 
         log.info("Request Body FullPostcodeDTO : {}", fullPostcodeDTO.toString());
 
-        FullPostcodeDTO savedFullPostcode = locationService.saveFullPostcode(fullPostcodeDTO);
+        FullPostcodeDTO savedFullPostcode = fullPostcodeService.save(fullPostcodeDTO);
         URI uri = UriComponentsBuilder.newInstance()
                 .path("/api/locations/fullpostcodes")
                 .pathSegment("{code}")
@@ -68,7 +78,7 @@ public class LocationApi {
         log.info("Path variables outcode: {}", outcode);
         log.info("Request Body OutcodeDTO : {}", outcodeDTO.toString());
 
-        return ResponseEntity.ok(locationService.updateOutcode(outcode, outcodeDTO));
+        return ResponseEntity.ok(outcodeService.update(outcode, outcodeDTO));
     }
 
     @PutMapping("/fullpostcodes/{postcode}")
@@ -77,6 +87,6 @@ public class LocationApi {
         log.info("Path variables outcode: {}", postcode);
         log.info("Request Body OutcodeDTO : {}", fullPostcodeDTO.toString());
 
-        return ResponseEntity.ok(locationService.updateFullPostcode(postcode, fullPostcodeDTO));
+        return ResponseEntity.ok(fullPostcodeService.update(postcode, fullPostcodeDTO));
     }
 }
