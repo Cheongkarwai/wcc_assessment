@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -15,6 +16,7 @@ public class FullPostcodeDTO {
 
     @NotBlank(message = "Postal code must not be empty")
     @ExistingFullPostcode
+    @Length(max = 8, message = "Full Postcode maximum character length is 8")
     @Pattern(regexp = "^[A-Za-z]+[0-9]+ [A-Za-z]+[0-9]+$",message = "Postal code must have outcode and incode")
     private String postalCode;
 
