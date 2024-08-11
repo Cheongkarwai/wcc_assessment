@@ -36,7 +36,7 @@ public class LocationApi {
     }
 
 
-    @GetMapping
+    @GetMapping("/distance")
     public HttpEntity<DistanceDTO> findDistanceByPostalCodes(@RequestParam("outcode") String outcode,
                                                          @RequestParam("incode") String incode){
 

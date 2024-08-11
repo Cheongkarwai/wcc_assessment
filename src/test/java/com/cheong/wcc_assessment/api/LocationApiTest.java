@@ -45,7 +45,7 @@ public class LocationApiTest {
 
     @Test
     void givenMissingParameter_thenReturnBadRequest() throws Exception {
-        this.mockMvc.perform(get("/api/locations")
+        this.mockMvc.perform(get("/api/locations/distance")
                         .with(SecurityMockMvcRequestPostProcessors.jwt()))
                 .andExpect(status().isBadRequest());
     }
@@ -54,7 +54,7 @@ public class LocationApiTest {
     void givenInvalidPostalCode_thenReturnNotFound() throws Exception {
         when(locationService.findDistanceByPostalCodes(anyString(), anyString())).thenThrow(new NoSuchElementException("Resource not found"));
 
-        this.mockMvc.perform(get("/api/locations").with(SecurityMockMvcRequestPostProcessors.jwt()).queryParam("outcode", anyString())
+        this.mockMvc.perform(get("/api/locations/distance").with(SecurityMockMvcRequestPostProcessors.jwt()).queryParam("outcode", anyString())
                         .queryParam("incode", anyString()))
                 .andExpect(status().isNotFound());
     }
