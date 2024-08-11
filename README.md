@@ -8,7 +8,7 @@
 6. Then you will be able to access other endpoints since you are authenticated.
 
 7. Location API endpoints
-   - GET /api/locations query parameter: outcode:string, incode:string
+   - GET /api/locations/distance query parameter: outcode:string, incode:string
    - PUT /api/locations/outcodes/{outcode} request body: {outcode: String, latitude: double, longitude: double}
    - PUT /api/locations/fullpostcodes/{postcode} request body: {postalCode: String, latitude: double, longitude: double}
    - POST /api/locations/fullpostcodes request body: {postalCode: String, latitude: double, longitude: double}
