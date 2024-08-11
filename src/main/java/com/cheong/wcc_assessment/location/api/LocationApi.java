@@ -55,7 +55,7 @@ public class LocationApi {
         URI uri = UriComponentsBuilder.newInstance()
                 .path("/api/locations/outcodes")
                 .pathSegment("{code}")
-                .build(savedOutcode.getOutcode());
+                .build(outcodeDTO.getOutcode());
         return ResponseEntity.created(uri).build();
     }
 
@@ -68,7 +68,7 @@ public class LocationApi {
         URI uri = UriComponentsBuilder.newInstance()
                 .path("/api/locations/fullpostcodes")
                 .pathSegment("{code}")
-                .build(savedFullPostcode.getPostalCode());
+                .build(fullPostcodeDTO.getPostalCode());
         return ResponseEntity.created(uri).build();
     }
 
